@@ -1,0 +1,62 @@
+version: "3.3"
+networks:
+  app-tier:
+    driver: bridge
+services:
+  database:
+    image: "mongo:latest"
+    restart: always
+    container_name: "codmongo"
+    networks:
+      - app-tier
+    volumes:
+      - ./mongo-volume:/data/db
+    ports:
+      - "27017:27017"
+  rabbitmq:
+    container_name: "codmq"
+    image: "bitnami/rabbitmq:latest"
+    networks:
+      - app-tier
+    ports:
+      - "15672:15672"
+      - "5672:5672"
+  node-app:
+    image: "node:8"
+    user: "node"
+    networks:
+      - app-tier
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./../client:/home/node/app
+    expose:
+      - "3000"
+    command: "npm start"
+  node-api:
+    image: "node:8"
+    user: "node"
+    networks:
+      - app-tier
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./../api/packages/search:/home/node/app
+    expose:
+      - "5000"
+    command: "npm i && npm start"
+  node-micro:
+    image: "node:8"
+    user: "node"
+    networks:
+      - app-tier
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./../api/packages/translate:/home/node/app
+    expose:
+      - "5000"
+    command: "npm i && npm start"

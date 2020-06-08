@@ -1,0 +1,8 @@
+{
+  "name": "pokeshakesapi",
+  "private": true,
+  "workspaces": [
+    "packages/search",
+    "packages/translate"
+  ]
+}
