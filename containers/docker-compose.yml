@@ -15,26 +15,15 @@ services:
       - "27017:27017"
   rabbitmq:
     container_name: "codmq"
+    restart: always
     image: "bitnami/rabbitmq:latest"
     networks:
       - app-tier
     ports:
       - "15672:15672"
       - "5672:5672"
-  node-app:
-    image: "node:8"
-    user: "node"
-    networks:
-      - app-tier
-    working_dir: /home/node/app
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./../client:/home/node/app
-    expose:
-      - "3000"
-    command: "npm start"
   node-api:
+    container_name: "codapi"
     image: "node:8"
     user: "node"
     networks:
@@ -44,10 +33,14 @@ services:
       - NODE_ENV=development
     volumes:
       - ./../api/packages/search:/home/node/app
-    expose:
-      - "5000"
-    command: "npm i && npm start"
+    ports:
+      - "5000:5000"
+    depends_on:
+      - database
+      - rabbitmq
+    command: "npm start"
   node-micro:
+    container_name: "codmicro1"
     image: "node:8"
     user: "node"
     networks:
@@ -57,6 +50,27 @@ services:
       - NODE_ENV=development
     volumes:
       - ./../api/packages/translate:/home/node/app
-    expose:
-      - "5000"
-    command: "npm i && npm start"
+    depends_on:
+      - database
+      - rabbitmq
+      - node-api
+    command: "npm start"
+  node-app:
+    container_name: "codapp"
+    image: "node:8"
+    user: "node"
+    networks:
+      - app-tier
+    working_dir: /home/node/app
+    environment:
+      - NODE_ENV=development
+    volumes:
+      - ./../client:/home/node/app
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+      - rabbitmq
+      - node-micro
+      - node-api
+    command: "npm start"
