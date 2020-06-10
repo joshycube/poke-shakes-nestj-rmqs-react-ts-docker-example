@@ -1,0 +1,19 @@
+version: '3.3'
+services:
+  databasedev:
+    image: 'mongo:latest'
+    restart: always
+    container_name: 'codmongo-dev'
+    volumes:
+      - ./mongo-volume:/data/db
+    ports:
+      - '27017:27017'
+  rabbitmqdev:
+    container_name: 'codmq-dev'
+    restart: always
+    image: 'rabbitmq:management'
+    ports:
+      - '15672:15672'
+      - '5672:5672'
+    volumes:
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
