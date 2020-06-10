@@ -5,5 +5,5 @@
   "searchhint": "Type your favourite Pokemon",
   "addtofavs": "Add to favourites",
   "removefromfavs": "Remove from favourites",
-  "E000001": "Unfortunately, {subject} is not a Pokemon"
+  "E000001": "Unfortunately, {subject} is not a Pokemon. Try Pikachu"
 }
