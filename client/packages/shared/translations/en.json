@@ -1,3 +1,7 @@
 {
-  "remove": "remove"
+  "remove": "remove",
+  "pokesarch": "Pokemon search",
+  "typehint": "Type your favourite Pokemon",
+  "addtofavs": "Add to favourites",
+  "removefromfavs": "Remove from favourites"
 }
