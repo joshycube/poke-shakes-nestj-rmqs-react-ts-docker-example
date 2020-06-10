@@ -9,8 +9,8 @@ async function bootstrap() {
     {
       transport: Transport.RMQ,
       options: {
-        urls: ['amqp://user:bitnami@localhost:5672/hello'],
-        queue: 'pokes_queue',
+        urls: ['amqp://guest:guest@rabbitmq:5672/'],
+        queue: 'translate',
         queueOptions: {
           durable: false,
         },
