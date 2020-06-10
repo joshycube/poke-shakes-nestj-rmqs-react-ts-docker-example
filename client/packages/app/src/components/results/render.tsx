@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from 'react-intl'
 
 import { IPokemon } from "../../interfaces/IPokemon";
 
@@ -8,17 +9,18 @@ import { StyledParagraph } from "./style";
 interface IProps {
   result: IPokemon;
   handleFavourite: (item: IPokemon) => void;
+  messageId: string
 }
 
-function ResultsRender({ result, handleFavourite }: IProps) {
+function ResultsRender({ result, handleFavourite, messageId }: IProps) {
   return (
     <div>
       <h2>{result.name}</h2>
       <StyledButton onClick={() => handleFavourite(result)}>
-        Add to favourites
+        <FormattedMessage id={messageId} />
       </StyledButton>
       <StyledParagraph>{result.description}</StyledParagraph>
-    </div>
+    </div >
   );
 }
 

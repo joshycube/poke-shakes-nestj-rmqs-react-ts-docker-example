@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from 'react-intl'
 
 import { IPokemon } from "../../interfaces/IPokemon";
 
@@ -14,7 +15,7 @@ function FavouritesRender({ favourite, handleFavourite }: IProps) {
     <div>
       <h2>{favourite.name}</h2>
       <StyledButton onClick={() => handleFavourite(favourite._id)}>
-        Remove
+        <FormattedMessage id="remove" />
       </StyledButton>
     </div>
   );

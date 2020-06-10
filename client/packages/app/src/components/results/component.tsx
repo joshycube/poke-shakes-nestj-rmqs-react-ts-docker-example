@@ -17,10 +17,14 @@ function ResultsComponent({
   onFavouriteAdd,
   onFavouriteRemove,
 }: IProps) {
+
+  const isFavourite = (item: IPokemon): boolean => favourites.some(
+    (favItem: IPokemon) => favItem._id === item._id
+  );
+
   const handleFavourite = (item: IPokemon): void => {
-    const isFav = favourites.some(
-      (favItem: IPokemon) => favItem._id === item._id
-    );
+    const isFav = isFavourite(item);
+
     if (isFav) {
       onFavouriteRemove(item._id);
     } else {
@@ -35,6 +39,7 @@ function ResultsComponent({
           handleFavourite={handleFavourite}
           key={result._id}
           result={result}
+          messageId={isFavourite(result) ? 'removefromfavs' : 'addtofavs'}
         />
       ))}
     </Fragment>
