@@ -16,7 +16,7 @@ services:
       - '15672:15672'
       - '5672:5672'
     volumes:
-     - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
+      - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
   node-api:
     container_name: 'codapi'
     image: 'node:8'
