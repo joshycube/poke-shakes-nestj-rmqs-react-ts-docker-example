@@ -8,13 +8,14 @@ import { IAction } from "../../interfaces/IAction";
 
 function* fetchResults(action: IAction) {
   try {
+    const keyword = action.payload.replace(/[\W_]+/g, " ").toLowerCase();
     const response = yield call(
       axios.get,
-      `${API_URI}/pokemon/${action.payload}`
+      `${API_URI}/pokemon/${keyword}`
     );
     yield put({ type: SEARCH_DONE, payload: response.data });
   } catch (error) {
-    if (error.response.data.statusCode === 404) {
+    if (error?.response?.data?.statusCode === 404) {
       yield put({
         type: SEARCH_NOT_FOUND, payload: {
           subject: action.payload,
