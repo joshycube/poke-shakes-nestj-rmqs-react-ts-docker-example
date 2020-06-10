@@ -13,7 +13,7 @@ function* fetchResults(action: IAction) {
     );
     yield put({ type: SEARCH_DONE, payload: response.data });
   } catch (error) {
-    yield put({ type: SEARCH_FAILED, payload: error.message });
+    yield put({ type: SEARCH_FAILED, payload: { error: error.message.toString() || error.toString() } });
   }
 }
 

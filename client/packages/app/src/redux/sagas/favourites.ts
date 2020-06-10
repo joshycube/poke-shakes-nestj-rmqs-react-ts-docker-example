@@ -51,7 +51,7 @@ function* addFavourite(action: IAction) {
     const storedFavouritesArray = yield call(manipulateStorage, action);
     yield put({ type: FAV_ADD_DONE, payload: storedFavouritesArray });
   } catch (error) {
-    yield put({ type: FAV_ADD_FAILED, payload: error.message });
+    yield put({ type: FAV_ADD_FAILED, payload: { error: error.message } });
   }
 }
 
@@ -60,7 +60,7 @@ function* removeFavourite(action: IAction) {
     yield call(manipulateStorage, action);
     yield put({ type: FAV_REMOVE_DONE, payload: action.payload });
   } catch (error) {
-    yield put({ type: FAV_REMOVE_FAILED, payload: error.message });
+    yield put({ type: FAV_REMOVE_FAILED, payload: { error: error.message } });
   }
 }
 
