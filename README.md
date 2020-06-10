@@ -11,7 +11,7 @@ This is a demonstration of a NodeJS based micro service architecture consumed by
 
 ### Steps
 
-- `sh demo.sh` (or alternatively cd in to containers and run `docker-compose up -d`)
+- `sh demo.sh`
 - open `http://localhost:8080` in your browser
 - type in Celebi for instance and hit enter
 
@@ -24,7 +24,9 @@ This is a demonstration of a NodeJS based micro service architecture consumed by
 - node 13
 - npm or yarn
 
-- `sh dev.sh` (or alternatively cd in to containers-dev and run `docker-compose up -d`)
+### Steps
+
+- `sh dev.sh`
 - cd in to client and run `yarn`
 - cd in to client/packages/shared and run `yarn`
 - cd in to client/packages/app and run `yarn` then `yarn start`
