@@ -9,7 +9,7 @@ import { Pokemon, PokemonSchema } from './schemas/pokemon.schema';
 @Module({
   imports: [
     HttpModule,
-    MongooseModule.forRoot('mongodb://localhost:27017/pokeshakes'),
+    MongooseModule.forRoot('mongodb://database:27017/pokeshakes'),
     MongooseModule.forFeature([{ name: Pokemon.name, schema: PokemonSchema }]),
   ],
   controllers: [AppController],

@@ -9,15 +9,15 @@ import { Pokemon, PokemonSchema } from './schemas/pokemon.schema';
 
 @Module({
   imports: [
-    MongooseModule.forRoot('mongodb://localhost:27017/pokeshakes'),
+    MongooseModule.forRoot('mongodb://database:27017/pokeshakes'),
     MongooseModule.forFeature([{ name: Pokemon.name, schema: PokemonSchema }]),
     ClientsModule.register([
       {
         name: 'TRANSLATION_SERVICE',
         transport: Transport.RMQ,
         options: {
-          urls: ['amqp://user:bitnami@localhost:5672/hello'],
-          queue: 'pokes_queue',
+          urls: ['amqp://guest:guest@rabbitmq:5672/'],
+          queue: 'translate',
           queueOptions: {
             durable: false,
           },
