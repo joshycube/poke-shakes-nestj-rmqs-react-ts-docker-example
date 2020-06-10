@@ -1,7 +1,16 @@
-import React from "react";
+import { connect } from "react-redux";
 
-function Error({ error }: { error: any }) {
-  return <div>{error.toString()}</div>;
-}
+import ErrorComponent from "./component";
 
-export default Error;
+import { IState } from "../../redux/reducers";
+
+
+const mapStateToProps = (state: IState) => {
+  return {
+    errors: state.errors,
+  };
+};
+
+export const ErrorContainer = connect(
+  mapStateToProps,
+)(ErrorComponent);
