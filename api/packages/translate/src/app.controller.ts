@@ -4,14 +4,14 @@ import { MessagePattern } from '@nestjs/microservices';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: AppService) { }
 
   @MessagePattern({ cmd: 'translate' })
   async handleMessageTranslate(data: string): Promise<string> {
     try {
       return await this.appService.translatePokemon(data);
     } catch (error) {
-      throw error;
+      return error.response.status;
     }
   }
 }
