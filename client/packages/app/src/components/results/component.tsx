@@ -30,7 +30,7 @@ function ResultsComponent({
 
   return (
     <Fragment>
-      {searchResults.map((result: IPokemon) => (
+      {!!searchResults.length && searchResults.map((result: IPokemon) => (
         <ResultsRender
           handleFavourite={handleFavourite}
           key={result._id}
