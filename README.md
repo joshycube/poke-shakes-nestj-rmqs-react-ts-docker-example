@@ -54,3 +54,10 @@ Dockerized and tested by Cypress.
 - run `yarn`
 - run `yarn run cypress:open`
 - pick a test and run it
+
+## How to run eslint on this project?
+
+### Steps
+
+- cd in to client
+- run `yarn lint`
