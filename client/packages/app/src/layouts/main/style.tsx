@@ -10,3 +10,8 @@ export const StyledLayoutFooter = styled.div`
   width: 100%;
   margin-top: 15px;
 `;
+
+export const StyledErrorWrapper = styled.div`
+  background: red;
+  color: white;
+`

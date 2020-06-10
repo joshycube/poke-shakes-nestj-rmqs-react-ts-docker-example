@@ -1,10 +1,12 @@
 import React, { ReactChild } from "react";
 
 import { FavouritesContainer } from "../../components/favourites";
+import { ErrorContainer } from '../../components/error'
 
 import { StyledFlexColumnWrapper } from "../../components/styled/flexColumnWrapper";
 import { StyledFlexWrapper } from "../../components/styled/flexWrapper";
-import { StyledLayoutFooter } from "./style";
+
+import { StyledLayoutFooter, StyledErrorWrapper } from "./style";
 
 interface IProps {
   children: ReactChild;
@@ -21,6 +23,9 @@ function MainLayout({ children }: IProps) {
       </div>
       <StyledLayoutFooter>
         <footer>
+          <StyledErrorWrapper>
+            <ErrorContainer />
+          </StyledErrorWrapper>
           <StyledFlexWrapper>
             <FavouritesContainer />
           </StyledFlexWrapper>
