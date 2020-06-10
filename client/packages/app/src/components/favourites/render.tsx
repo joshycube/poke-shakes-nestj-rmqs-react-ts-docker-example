@@ -12,9 +12,9 @@ interface IProps {
 
 function FavouritesRender({ favourite, handleFavourite }: IProps) {
   return (
-    <div>
+    <div data-test-id="favourite-item-wrapper">
       <h2>{favourite.name}</h2>
-      <StyledButton onClick={() => handleFavourite(favourite._id)}>
+      <StyledButton data-test-id="remove-favourite" onClick={() => handleFavourite(favourite._id)}>
         <FormattedMessage id="remove" />
       </StyledButton>
     </div>

@@ -9,9 +9,11 @@ interface IProps {
 function NotFoundRender({ notFound }: IProps) {
 
   return (
-    <FormattedMessage id={notFound.message} values={{
-      subject: notFound.subject,
-    }} />
+    <div data-test-id="not-found-wrapper">
+      <FormattedMessage id={notFound.message} values={{
+        subject: notFound.subject,
+      }} />
+    </div>
   )
 
 }

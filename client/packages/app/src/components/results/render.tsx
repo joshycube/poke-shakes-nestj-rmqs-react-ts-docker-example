@@ -14,9 +14,9 @@ interface IProps {
 
 function ResultsRender({ result, handleFavourite, messageId }: IProps) {
   return (
-    <div>
+    <div data-test-id="results-wrapper">
       <h2>{result.name}</h2>
-      <StyledButton onClick={() => handleFavourite(result)}>
+      <StyledButton data-test-id="toggle-favourite" onClick={() => handleFavourite(result)}>
         <FormattedMessage id={messageId} />
       </StyledButton>
       <StyledParagraph>{result.description}</StyledParagraph>

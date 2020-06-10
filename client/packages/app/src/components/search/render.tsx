@@ -14,6 +14,7 @@ function SearchRender({ searchInput, setSearchInput, onKeyPress }: IProps) {
     <FormattedMessage id="searchhint">
       {(placeholder: string) => (
         <StyledTextInput
+          data-test-id="search-input"
           placeholder={placeholder}
           value={searchInput}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
