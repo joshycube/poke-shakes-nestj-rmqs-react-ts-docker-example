@@ -19,13 +19,9 @@ services:
       - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
   node-api:
     container_name: 'codapi'
-    image: 'node:8'
-    user: 'node'
-    working_dir: /home/node/app
+    build: ./../api/packages/search
     environment:
-      - NODE_ENV=development
-    volumes:
-      - ./../api/packages/search:/home/node/app
+      - NODE_ENV=production
     ports:
       - '5000:5000'
     depends_on:
@@ -34,16 +30,12 @@ services:
     links:
       - database
       - rabbitmq
-    command: 'npm start'
+    command: 'yarn start:prod'
   node-micro:
     container_name: 'codmicro1'
-    image: 'node:8'
-    user: 'node'
-    working_dir: /home/node/app
+    build: ./../api/packages/translate
     environment:
-      - NODE_ENV=development
-    volumes:
-      - ./../api/packages/translate:/home/node/app
+      - NODE_ENV=production
     depends_on:
       - database
       - rabbitmq
@@ -52,4 +44,14 @@ services:
       - database
       - rabbitmq
       - node-api
-    command: 'npm start'
+    command: 'yarn start:prod'
+  webapp:
+    container_name: codapp
+    build: ./../client
+    ports:
+      - '8080:80'
+    depends_on:
+      - database
+      - rabbitmq
+      - node-api
+      - node-micro
