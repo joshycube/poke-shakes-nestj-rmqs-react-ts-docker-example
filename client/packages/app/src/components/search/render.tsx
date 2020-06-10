@@ -1,4 +1,5 @@
 import React from "react";
+import { FormattedMessage } from 'react-intl'
 
 import { StyledTextInput } from "../styled/textInput";
 
@@ -10,14 +11,18 @@ interface IProps {
 
 function SearchRender({ searchInput, setSearchInput, onKeyPress }: IProps) {
   return (
-    <StyledTextInput
-      placeholder="Type your favourite Pokemon"
-      value={searchInput}
-      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-        setSearchInput(event.target.value)
-      }
-      onKeyPress={onKeyPress}
-    />
+    <FormattedMessage id="searchhint">
+      {(placeholder: string) => (
+        <StyledTextInput
+          placeholder={placeholder}
+          value={searchInput}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setSearchInput(event.target.value)
+          }
+          onKeyPress={onKeyPress}
+        />
+      )}
+    </FormattedMessage>
   );
 }
 

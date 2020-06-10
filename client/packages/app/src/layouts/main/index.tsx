@@ -1,4 +1,5 @@
 import React, { ReactChild } from "react";
+import { FormattedMessage } from 'react-intl'
 
 import { FavouritesContainer } from "../../components/favourites";
 import { ErrorContainer } from '../../components/error'
@@ -16,7 +17,7 @@ function MainLayout({ children }: IProps) {
   return (
     <StyledFlexColumnWrapper>
       <header>
-        <h1>Pokemon search</h1>
+        <h1><FormattedMessage id="pokesarch" /></h1>
       </header>
       <div>
         <main>{children}</main>

@@ -20,7 +20,7 @@ function ResultsRender({ result, handleFavourite, messageId }: IProps) {
         <FormattedMessage id={messageId} />
       </StyledButton>
       <StyledParagraph>{result.description}</StyledParagraph>
-    </div >
+    </div>
   );
 }
 
