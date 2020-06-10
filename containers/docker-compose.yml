@@ -1,50 +1,44 @@
-version: "3.3"
-networks:
-  app-tier:
-    driver: bridge
+version: '3.3'
 services:
   database:
-    image: "mongo:latest"
+    image: 'mongo:latest'
     restart: always
-    container_name: "codmongo"
-    networks:
-      - app-tier
+    container_name: 'codmongo'
     volumes:
       - ./mongo-volume:/data/db
     ports:
-      - "27017:27017"
+      - '27017:27017'
   rabbitmq:
-    container_name: "codmq"
+    container_name: 'codmq'
     restart: always
-    image: "bitnami/rabbitmq:latest"
-    networks:
-      - app-tier
+    image: 'rabbitmq:management'
     ports:
-      - "15672:15672"
-      - "5672:5672"
+      - '15672:15672'
+      - '5672:5672'
+    volumes:
+     - ./rabbitmq/definitions.json:/etc/rabbitmq/definitions.json:ro
   node-api:
-    container_name: "codapi"
-    image: "node:8"
-    user: "node"
-    networks:
-      - app-tier
+    container_name: 'codapi'
+    image: 'node:8'
+    user: 'node'
     working_dir: /home/node/app
     environment:
       - NODE_ENV=development
     volumes:
       - ./../api/packages/search:/home/node/app
     ports:
-      - "5000:5000"
+      - '5000:5000'
     depends_on:
       - database
       - rabbitmq
-    command: "npm start"
+    links:
+      - database
+      - rabbitmq
+    command: 'npm start'
   node-micro:
-    container_name: "codmicro1"
-    image: "node:8"
-    user: "node"
-    networks:
-      - app-tier
+    container_name: 'codmicro1'
+    image: 'node:8'
+    user: 'node'
     working_dir: /home/node/app
     environment:
       - NODE_ENV=development
@@ -54,23 +48,8 @@ services:
       - database
       - rabbitmq
       - node-api
-    command: "npm start"
-  node-app:
-    container_name: "codapp"
-    image: "node:8"
-    user: "node"
-    networks:
-      - app-tier
-    working_dir: /home/node/app
-    environment:
-      - NODE_ENV=development
-    volumes:
-      - ./../client:/home/node/app
-    ports:
-      - "3000:3000"
-    depends_on:
+    links:
       - database
       - rabbitmq
-      - node-micro
       - node-api
-    command: "npm start"
+    command: 'npm start'
