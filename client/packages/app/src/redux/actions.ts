@@ -1,9 +1,11 @@
 import { IPokemon } from "../interfaces/IPokemon";
 import { IAction } from "../interfaces/IAction";
+import { INotFound } from "../interfaces/INotFound";
 
 export const SEARCH_START = "SEARCH_START";
 export const SEARCH_DONE = "SEARCH_DONE";
 export const SEARCH_FAILED = "SEARCH_FAILED";
+export const SEARCH_NOT_FOUND = "SEARCH_NOT_FOUND";
 
 export const FAV_FETCH = "FAV_FETCH";
 export const FAV_ADD_START = "FAV_ADD_START";
@@ -31,6 +33,13 @@ export function searchDone(payload: IPokemon): IAction {
 export function searchFailed(payload: string): IAction {
   return {
     type: SEARCH_FAILED,
+    payload,
+  };
+}
+
+export function searchNotFound(payload: INotFound): IAction {
+  return {
+    type: SEARCH_NOT_FOUND,
     payload,
   };
 }
