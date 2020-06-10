@@ -15,6 +15,7 @@ const mapStateToProps = (state: IState) => {
   return {
     searchResults: state.results,
     favourites: state.favourites,
+    notFound: state.notFound,
   };
 };
 

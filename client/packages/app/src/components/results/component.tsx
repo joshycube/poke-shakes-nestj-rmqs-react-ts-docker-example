@@ -1,14 +1,17 @@
 import React, { Fragment } from "react";
 
 import ResultsRender from "./render";
+import NotFoundRender from '../notFound'
 
 import { IPokemon } from "../../interfaces/IPokemon";
+import { INotFound } from "../../interfaces/INotFound";
 
 interface IProps {
   searchResults: IPokemon[];
   favourites: IPokemon[];
   onFavouriteAdd: (item: IPokemon) => void;
   onFavouriteRemove: (id: string) => void;
+  notFound?: INotFound
 }
 
 function ResultsComponent({
@@ -16,6 +19,7 @@ function ResultsComponent({
   favourites,
   onFavouriteAdd,
   onFavouriteRemove,
+  notFound,
 }: IProps) {
 
   const isFavourite = (item: IPokemon): boolean => favourites.some(
@@ -23,7 +27,7 @@ function ResultsComponent({
   );
 
   const handleFavourite = (item: IPokemon): void => {
-    const isFav = isFavourite(item);
+    const isFav: boolean = isFavourite(item);
 
     if (isFav) {
       onFavouriteRemove(item._id);
@@ -34,6 +38,9 @@ function ResultsComponent({
 
   return (
     <Fragment>
+      {
+        notFound?.message && <NotFoundRender notFound={notFound} />
+      }
       {!!searchResults.length && searchResults.map((result: IPokemon) => (
         <ResultsRender
           handleFavourite={handleFavourite}
