@@ -1,1 +1,1 @@
-export const sanitizeSearchParam = (param: string): string => param.replace(/[\W_]+/g, " ").toLowerCase()
+export const sanitizeSearchParam = (param: string): string => param.replace(/[\W_]+/g, "").toLowerCase()

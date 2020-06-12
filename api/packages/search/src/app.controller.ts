@@ -9,7 +9,7 @@ import SanitizeInterceptor from './interceptors/sanitize';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    @Inject('TRANSLATION_SERVICE') private readonly client: ClientProxy,
+    @Inject('TranslationService') private readonly client: ClientProxy,
   ) { }
 
   async onApplicationBootstrap(): Promise<any> {

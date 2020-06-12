@@ -21,7 +21,7 @@ export class AppModule {
         MongooseModule.forFeature([{ name: Pokemon.name, schema: PokemonSchema }]),
         ClientsModule.register([
           {
-            name: 'TRANSLATION_SERVICE',
+            name: 'TranslationService',
             transport: Transport.RMQ,
             options: {
               urls: [settings.MQ_LINK],
