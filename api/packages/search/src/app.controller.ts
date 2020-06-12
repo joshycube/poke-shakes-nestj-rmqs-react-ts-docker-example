@@ -18,7 +18,7 @@ export class AppController {
 
   @Get('/pokemon/:name')
   @UseInterceptors(SanitizeInterceptor)
-  async getPokemon(@Param('name') name: string): Promise<IPokemon> {
+  public async getPokemon(@Param('name') name: string): Promise<IPokemon> {
     try {
       return await this.appService.getPokemon(name);
     } catch (error) {
