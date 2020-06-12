@@ -9,7 +9,7 @@ import SanitizeInterceptor from './interceptors/sanitize';
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    @Inject('TRANSLATION_SERVICE') private readonly client: ClientProxy,
+    @Inject('TranslationService') private readonly client: ClientProxy,
   ) { }
 
   async onApplicationBootstrap(): Promise<any> {
@@ -18,7 +18,7 @@ export class AppController {
 
   @Get('/pokemon/:name')
   @UseInterceptors(SanitizeInterceptor)
-  async getPokemon(@Param('name') name: string): Promise<IPokemon> {
+  public async getPokemon(@Param('name') name: string): Promise<IPokemon> {
     try {
       return await this.appService.getPokemon(name);
     } catch (error) {

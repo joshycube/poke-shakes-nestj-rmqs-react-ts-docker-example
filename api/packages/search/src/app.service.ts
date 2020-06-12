@@ -9,14 +9,13 @@ import { Pokemon } from './schemas/pokemon.schema';
 export class AppService {
   constructor(
     @InjectModel(Pokemon.name) private pokemonModel: Model<Pokemon>,
-    @Inject('TRANSLATION_SERVICE') private client: ClientProxy,
+    @Inject('TranslationService') private client: ClientProxy,
   ) { }
 
   private async translateMsg(name: string): Promise<any> {
     try {
       const pattern = { cmd: 'translate' };
-      const data = name;
-      const msg = this.client.send<string>(pattern, data);
+      const msg = this.client.send<string>(pattern, name);
       const result = await msg.toPromise();
       return result;
     } catch (error) {
@@ -24,7 +23,7 @@ export class AppService {
     }
   }
 
-  async getPokemon(name: string): Promise<Pokemon> {
+  public async getPokemon(name: string): Promise<Pokemon> {
     let pokemonResult = await this.pokemonModel.findOne({ name }).exec();
 
     if (pokemonResult !== null) {
@@ -34,7 +33,7 @@ export class AppService {
     try {
       const result = await this.translateMsg(name);
 
-      // TODO bette error handler
+      // TODO better error handler
 
       if (result === 404) {
         throw new NotFoundException('E000001');
