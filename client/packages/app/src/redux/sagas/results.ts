@@ -8,7 +8,7 @@ import { IAction } from "../../interfaces/IAction";
 
 function* fetchResults(action: IAction) {
   try {
-    const keyword = action.payload.replace(/[\W_]+/g, " ").toLowerCase();
+    const keyword = action.payload.replace(/[\W_]+/g, "").toLowerCase();
     const response = yield call(
       axios.get,
       `${API_URI}/pokemon/${keyword}`

@@ -13,6 +13,7 @@ const mapDispatchToProps = (dispatch: Function) => ({
 const mapStateToProps = (state: IState) => {
   return {
     favourites: state.favourites,
+    loaders: state.loaders
   };
 };
 

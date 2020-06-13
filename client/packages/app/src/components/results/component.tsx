@@ -2,9 +2,11 @@ import React, { Fragment } from "react";
 
 import ResultsRender from "./render";
 import NotFoundRender from '../notFound'
+import LoaderRender from '../loader';
 
 import { IPokemon } from "../../interfaces/IPokemon";
 import { INotFound } from "../../interfaces/INotFound";
+import { ILoading } from "../../interfaces/ILoading";
 
 interface IProps {
   searchResults: IPokemon[];
@@ -12,6 +14,7 @@ interface IProps {
   onFavouriteAdd: (item: IPokemon) => void;
   onFavouriteRemove: (id: string) => void;
   notFound?: INotFound
+  loaders?: ILoading
 }
 
 function ResultsComponent({
@@ -20,6 +23,7 @@ function ResultsComponent({
   onFavouriteAdd,
   onFavouriteRemove,
   notFound,
+  loaders
 }: IProps) {
 
   const isFavourite = (item: IPokemon): boolean => favourites.some(
@@ -35,6 +39,12 @@ function ResultsComponent({
       onFavouriteAdd(item);
     }
   };
+
+  if (loaders && loaders.search) {
+    return (
+      <LoaderRender />
+    )
+  }
 
   return (
     <Fragment>
