@@ -12,10 +12,6 @@ export class AppController {
     @Inject('TranslationService') private readonly client: ClientProxy,
   ) { }
 
-  async onApplicationBootstrap(): Promise<any> {
-    await this.client.connect();
-  }
-
   @Get('/pokemon/:name')
   @UseInterceptors(SanitizeInterceptor)
   public async getPokemon(@Param('name') name: string): Promise<IPokemon> {
