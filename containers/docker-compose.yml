@@ -45,12 +45,22 @@ services:
       - rabbitmq
       - node-api
     command: 'yarn start:prod'
+  dependencies:
+    container_name: 'coddep'
+    image: dadarek/wait-for-dependencies
+    depends_on:
+      - database
+      - rabbitmq
+      - node-api
+      - node-micro
+    command: rabbitmq:15672
   webapp:
     container_name: codapp
     build: ./../client
     ports:
       - '8080:80'
     depends_on:
+      - dependencies
       - database
       - rabbitmq
       - node-api
